@@ -1,13 +1,9 @@
-diff --git a/modul1.py b/modul1.py
-index a8ba00dc8e492c78e1424331c597a19cf1d46b51..07f8fdf15de0283b9d39a37162e985de3f889b73 100644
---- a/modul1.py
-+++ b/modul1.py
-@@ -1,14 +1,19 @@
  import pandas as pd
  
  def excelden_faturalari_oku(excel_path):
      df = pd.read_excel(excel_path)
  
+
     faturalar_df = pd.DataFrame({
         "excel_ref": df.iloc[:, 0],
         "fatura_no": (
@@ -22,3 +18,6 @@ index a8ba00dc8e492c78e1424331c597a19cf1d46b51..07f8fdf15de0283b9d39a37162e985de
      faturalar_df = faturalar_df[faturalar_df["fatura_no"] != "nan"]
  
      return faturalar_df
+ 
+EOF
+)
