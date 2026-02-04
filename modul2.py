@@ -55,11 +55,10 @@ def fatura_bilgilerini_al(text):
     )
 
     if fatura_no_eslesme:
-        aday = fatura_no_eslesme.group(1).strip()
+        aday = fatura_no_eslesme.group(1).strip().upper()
         if len(aday) == 16:
             sonuc["fatura_no"] = aday
 
-    # 🔹 FATURA TARİHİ (mevcut yapı korunuyor)
     tarih = re.search(
         r"Fatura\s*Tarihi\s*[:\-]?\s*([0-9]{2}[\/\-\s][0-9]{2}[\/\-\s][0-9]{4})",
         text
@@ -71,3 +70,4 @@ def fatura_bilgilerini_al(text):
     sonuc["toplam_tutar"] = toplam_tutar_bul(text)
 
     return sonuc
+
