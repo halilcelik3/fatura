@@ -35,6 +35,20 @@ def excel_pdf_eslestir(df_excel, df_pdf):
     + eşleşenlere otomatik kod üretir
     """
 
+    def normalize_fatura_no(series):
+        return (
+            series
+            .astype("string")
+            .str.strip()
+            .str.upper()
+            .str.replace(r"\.0$", "", regex=True)
+        )
+
+    df_excel = df_excel.copy()
+    df_pdf = df_pdf.copy()
+    df_excel["fatura_no"] = normalize_fatura_no(df_excel["fatura_no"])
+    df_pdf["fatura_no"] = normalize_fatura_no(df_pdf["fatura_no"])
+
     # 🔴 YENİ VE KRİTİK ADIM (VAR OLANI BOZMAZ)
     # Aynı fatura_no varsa Excel bakiyelerini toplar
     df_excel_toplam = (
@@ -88,3 +102,4 @@ def excel_pdf_eslestir(df_excel, df_pdf):
             eslesme.at[idx, "olusan_kod"] = f"{prefix}-{orta_kod}.{sayaclar[ana_kod]}"
 
     return eslesme
+
